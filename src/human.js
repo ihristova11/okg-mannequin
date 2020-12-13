@@ -19,6 +19,8 @@
 // създаване на сцената
 function createScene()
 {
+	var loader = new THREE.TextureLoader();
+
 	// рисувателно поле
 	renderer = new THREE.WebGLRenderer({antialias:true});
 		renderer.setSize( window.innerWidth, window.innerHeight );
@@ -41,7 +43,7 @@ function createScene()
 	
 	// светлини
 	var light = new THREE.PointLight('white',0.5);
-		light.position.set(0,100,50);
+		light.position.set(0,100,5);
 		light.shadow.mapSize.width = 1024;
 		light.shadow.mapSize.height = 1024;	
 		light.castShadow = true;
@@ -53,13 +55,19 @@ function createScene()
 	onWindowResize();
 	
 	// земя
-	var ground = new THREE.Mesh(
-			new THREE.BoxGeometry(1000,1,1000),
-			new THREE.MeshPhongMaterial({color:'antiquewhite',shininess:1})
-		);
-		ground.receiveShadow = true;
-		ground.position.y = -30;
-		scene.add( ground );
+
+	ground = new THREE.Mesh(
+		new THREE.BoxGeometry(300, 1, 250),
+		new THREE.MeshPhongMaterial({
+			map: loader.load(
+				'https://2.bp.blogspot.com/-UdEdFPBqEhY/U5zmMCggqoI/AAAAAAAAAiw/rfzXCagHL_c/s1600/Sand+beach+soil+ground+shore+desert+texture+ver+1.jpg'
+			),
+			shininess: 1
+		})
+	);
+	ground.receiveShadow = true;
+	ground.position.y = -30;
+	scene.add(ground);
 
 	
 	// таймер
