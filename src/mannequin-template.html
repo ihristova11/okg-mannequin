@@ -34,7 +34,7 @@
 		);
 		//camera=new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
 
-		camera.position.set(0,20,225);
+		camera.position.set(0, 25, 225);
 
 		// дефиниция на човечетата и статичната им поза
 		var woman = new Female();
@@ -70,9 +70,84 @@
 		man.r_elbow.bend(150);
 
 
+
+
+		// chess figures
+		const white = new THREE.Mesh(new THREE.BoxGeometry(4, 0, 4), new THREE.MeshBasicMaterial({
+			color: '#ffd9b3'
+		}));
+		white.position.y = -4;
+		white.position.z = -10;
+		var black = new THREE.Mesh(new THREE.BoxGeometry(4, 0, 4), new THREE.MeshBasicMaterial({
+			color: '#4d2600'
+		}));
+		black.position.y = -4;
+		black.position.z = -10;
+		black.position.x = 4;
+		//scene.add(white, black);
+		// chess board
+		for (var i = 1; i <= 8; i++) {
+			for (var j = 1; j <= 8; j++) {
+				var fig = white.clone();
+				if ((i + j) % 2 == 0) {
+					var fig = black.clone();
+				}
+				fig.position.x = i * 4 - 18;
+				fig.position.z = 4 * j - 18;
+				scene.add(fig);
+			}
+		}
+
+		var sampleWhite = new THREE.Mesh(new THREE.BoxGeometry(1, 5, 1), new THREE.MeshBasicMaterial({
+			map: loader.load(
+				'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOY1MdDVw3YcoEGVUzRGxSDflDsmMvrXjNTQ&usqp=CAU'
+				)
+		}));
+		sampleWhite.position.y = -2.5;
+		sampleWhite.position.x = -14;
+		sampleWhite.position.z = -14;
+
+		// display white figures
+		for (var i = 1; i <= 2; i++) {
+			for (var j = 1; j <= 8; j++) {
+				var f = sampleWhite.clone();
+				f.position.x = -19 + 4.5 * i;
+				f.position.z = -18 + 4 * j;
+				if (i == 2) {
+					f.position.y = -4;
+				}
+				scene.add(f);
+			}
+		}
+
+		var sampleBlack = new THREE.Mesh(new THREE.BoxGeometry(1, 5, 1), new THREE.MeshBasicMaterial({
+			map: loader.load(
+				'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwfQ9EMIsLC4UwcLYavygSmKO6M4sY_CESCA&usqp=CAU'
+				)
+		}));
+		sampleBlack.position.y = -2.5;
+		sampleBlack.position.x = -14;
+		sampleBlack.position.z = -14;
+
+		// display black figures
+		for (var i = 1; i <= 2; i++) {
+			for (var j = 1; j <= 8; j++) {
+				var f = sampleBlack.clone();
+				f.position.x = 19 - 4.5 * i;
+				f.position.z = 18 - 4 * j;
+				if (i == 2) {
+					f.position.y = -4;
+				}
+				scene.add(f);
+			}
+		}
+
+
+
+
 		const boxWidth = 50;
 		const boxHeight = 1.5;
-		const boxDepth = 35;
+		const boxDepth = 40;
 		const texture = loader.load(
 			'https://images.pexels.com/photos/129733/pexels-photo-129733.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
 		const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
@@ -103,15 +178,15 @@
 		tableLeg4.position.x = 10;
 		scene.add(tableLeg, tableLeg2, tableLeg3, tableLeg4);
 
-		const chessGeometry = new THREE.BoxGeometry(20, 0, 20);
+		const chessGeometry = new THREE.BoxGeometry(35, 0, 35);
 		const chessMaterial = new THREE.MeshBasicMaterial({
 			map: loader.load(
-				'https://thumbs.dreamstime.com/b/seamless-black-and-white-checkered-tiles-13273539.jpg'
+				'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX20459486.jpg'
 			)
 		});
 		const chess = new THREE.Mesh(chessGeometry, chessMaterial);
 		chess.position.y = -4.5;
-		scene.add(chess);
+		//scene.add(chess);
 
 		var chair = new THREE.Mesh(new THREE.BoxGeometry(12, 1, 12), material);
 		chair.position.x = 30;
@@ -166,34 +241,34 @@
 		scene.add(chair2Leg1, chair2Leg2, chair2Leg3, chair2Leg4);
 		// анимация на човечетата, поза в момент t
 		function animate(t) {
-			woman.head.tilt(10*cos(2*t));
-			man.head.nod(10*cos(2*t));
-			woman.r_knee.bend(-10*cos(-2*t));
-			woman.r_ankle.bend(-10*cos(-2*t));
-			woman.r_arm.tilt(10*cos(t));
+			woman.head.tilt(10 * cos(2 * t));
+			man.head.nod(10 * cos(2 * t));
+			woman.r_knee.bend(-10 * cos(-2 * t));
+			woman.r_ankle.bend(-10 * cos(-2 * t));
+			woman.r_arm.tilt(10 * cos(t));
 			woman.r_leg.straddle(15);
 			woman.l_leg.straddle(-35);
 
 
 
-		//	woman2.r_knee.bend(45);
+			//	woman2.r_knee.bend(45);
 			woman2.l_elbow.bend(150);
 			woman2.r_elbow.bend(150);
-			woman2.r_elbow.tilt(25*cos(4*t));
-			woman2.r_arm.tilt(0.5*cos(4*t));
-			woman2.l_elbow.tilt(-25*cos(4*t));
-			woman2.l_arm.tilt(-0.5*cos(4*t));
+			woman2.r_elbow.tilt(25 * cos(4 * t));
+			woman2.r_arm.tilt(0.5 * cos(4 * t));
+			woman2.l_elbow.tilt(-25 * cos(4 * t));
+			woman2.l_arm.tilt(-0.5 * cos(4 * t));
 			woman2.l_knee.bend(170);
 			woman2.r_knee.bend(170);
 
 			woman2.l_leg.bend(60);
 			woman2.r_leg.bend(60);
-			woman2.position.y = 15*cos(3*t);
+			woman2.position.y = 5 * cos(2 * t);
 			woman2.l_knee.tilt(-45);
 			woman2.r_knee.tilt(45);
 			woman2.turn(180);
 
-			man.r_leg.raise(95+ 3*cos(5*t));
+			man.r_leg.raise(95 + 3 * cos(5 * t));
 			//man.bend(t);
 
 
