@@ -51,10 +51,10 @@
 		woman.turn(-180);
 
 		var woman2 = new Female();
-		woman2.position.x = 70;
-		woman2.position.z = 40;
+		woman2.position.x = 45;
+		woman2.position.z = 10;
 		woman2.position.y = 2;
-		woman2.turn(100);
+		woman2.turn(180);
 
 
 		var man = new Male();
@@ -101,7 +101,7 @@
 		var sampleWhite = new THREE.Mesh(new THREE.BoxGeometry(1, 5, 1), new THREE.MeshBasicMaterial({
 			map: loader.load(
 				'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOY1MdDVw3YcoEGVUzRGxSDflDsmMvrXjNTQ&usqp=CAU'
-				)
+			)
 		}));
 		sampleWhite.position.y = -2.5;
 		sampleWhite.position.x = -14;
@@ -123,7 +123,7 @@
 		var sampleBlack = new THREE.Mesh(new THREE.BoxGeometry(1, 5, 1), new THREE.MeshBasicMaterial({
 			map: loader.load(
 				'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwfQ9EMIsLC4UwcLYavygSmKO6M4sY_CESCA&usqp=CAU'
-				)
+			)
 		}));
 		sampleBlack.position.y = -2.5;
 		sampleBlack.position.x = -14;
@@ -141,9 +141,6 @@
 				scene.add(f);
 			}
 		}
-
-
-
 
 		const boxWidth = 50;
 		const boxHeight = 1.5;
@@ -242,38 +239,35 @@
 		// анимация на човечетата, поза в момент t
 		function animate(t) {
 			woman.head.tilt(10 * cos(2 * t));
-			man.head.nod(10 * cos(2 * t));
-			woman.r_knee.bend(-10 * cos(-2 * t));
+			woman.r_knee.bend(45 -10 * cos(-2 * t));
+			woman.r_leg.tilt(10 * cos(2 * t));
 			woman.r_ankle.bend(-10 * cos(-2 * t));
 			woman.r_arm.tilt(10 * cos(t));
 			woman.r_leg.straddle(15);
 			woman.l_leg.straddle(-35);
 
-
-
-			//	woman2.r_knee.bend(45);
-			woman2.l_elbow.bend(150);
-			woman2.r_elbow.bend(150);
-			woman2.r_elbow.tilt(25 * cos(4 * t));
-			woman2.r_arm.tilt(0.5 * cos(4 * t));
-			woman2.l_elbow.tilt(-25 * cos(4 * t));
-			woman2.l_arm.tilt(-0.5 * cos(4 * t));
-			woman2.l_knee.bend(170);
-			woman2.r_knee.bend(170);
-
-			woman2.l_leg.bend(60);
-			woman2.r_leg.bend(60);
-			woman2.position.y = 5 * cos(2 * t);
-			woman2.l_knee.tilt(-45);
-			woman2.r_knee.tilt(45);
-			woman2.turn(180);
-
+			man.head.nod(10 * cos(2 * t));
 			man.r_leg.raise(95 + 3 * cos(5 * t));
-			//man.bend(t);
+			man.r_elbow.bend(150);
+			man.r_arm.straddle(-9 * cos(t));
+			man.l_arm.straddle(-9 * cos(t));
 
 
-			//woman2.r_leg.bend(10*cos(2*t));
-			// въртим сцената
+			woman2.r_leg.bend(2 * cos(t));
+			woman2.r_elbow.bend(50);
+			woman2.r_arm.bend(25);
+			woman2.l_arm.bend(55);
+			woman2.l_elbow.bend(10 - 10 * cos(3 * t));
+			woman2.r_leg.straddle(15);
+			woman2.r_knee.tilt(-10);
+			woman2.r_ankle.bend(4 * cos(3*t));
+			woman2.l_wrist.turn(95);
+			woman2.r_wrist.bend(12);
+			woman2.l_fingers.bend(65 + sin(3 * t));
+			woman2.r_fingers.bend(65 + -30 * sin(0.5 * t));
+			woman2.torso.bend(5 * cos(0.5 * t))
+			woman2.head.nod(5 * cos(2 * t));
+
 			scene.rotation.y = t / 1000;
 		}
 	</script>
