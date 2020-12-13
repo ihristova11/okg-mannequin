@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+
+<html>
+	<head>
+		<script src="three.min.js"></script>
+		<style> body {color: black; text-shadow: 0 0 3px gray; text-align:center; font-family: Calibri;} label {cursor: default; margin: 0 1em;}</style>
+	</head>
+	
+	<body>
+		<!-- Въведете ф.н, група, имена + заглавие на домашното -->
+		<h1>
+			ф.н. 99999 &ndash; група 9 &ndash; Име Фамилиев<br>
+			Заглавие на сцената
+		</h1>
+		
+		<script src="human.js"></script>
+		<script>
+
+			// дефиниция на човечетата и статичната им поза
+			var woman = new Female();
+				woman.position.y = 2;
+				woman.l_leg.straddle(-5);
+				woman.r_leg.straddle(-5);
+				
+
+			// анимация на човечетата, поза в момент t
+			function animate(t)
+			{
+				// в момента само кима с глава
+				woman.head.nod(35+15*cos(4*t));
+				
+				// въртим сцената
+				scene.rotation.y = t/500;
+			}
+		</script>
+	</body>
+</html>
