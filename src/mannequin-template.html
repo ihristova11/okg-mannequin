@@ -28,52 +28,29 @@
 
 	<script src="human.js"></script>
 	<script>
-		const loader = new THREE.TextureLoader();
+		var loader = new THREE.TextureLoader();
 		scene.background = loader.load(
 			'https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b3010b4e-6a23-4983-824c-9521d8b55ba6/d4imqy2-50f566be-cc3f-433c-8d60-1131b553b40f.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvYjMwMTBiNGUtNmEyMy00OTgzLTgyNGMtOTUyMWQ4YjU1YmE2XC9kNGltcXkyLTUwZjU2NmJlLWNjM2YtNDMzYy04ZDYwLTExMzFiNTUzYjQwZi5wbmcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.3DxtBAujpA2a8lTqd0oHfUaiUPRAzuG5q_SpRTkWsj4'
 		);
-		//camera=new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 1000 );
 
 		camera.position.set(0, 25, 225);
 
 		// дефиниция на човечетата и статичната им поза
-		var woman = new Female();
-		woman.position.y = -12;
-		woman.position.x = 30;
-		woman.l_leg.bend(90);
-		woman.r_leg.bend(90);
-		woman.l_knee.bend(90);
-		woman.r_knee.bend(90);
-		woman.l_arm.bend(25);
-		woman.l_elbow.bend(150);
-		woman.r_arm.bend(25);
-		woman.r_elbow.bend(150);
-		woman.turn(-180);
+		var woman1 = new Female();
+		woman1.position.y = -12;
+		woman1.position.x = 30;
 
 		var woman2 = new Female();
 		woman2.position.x = 45;
 		woman2.position.z = 10;
 		woman2.position.y = 2;
-		woman2.turn(180);
-
 
 		var man = new Male();
 		man.position.y = -10;
 		man.position.x = -30;
-		man.l_leg.bend(90);
-		man.r_leg.bend(90);
-		man.l_knee.bend(90);
-		man.r_knee.bend(90);
-		man.l_arm.bend(25);
-		man.l_elbow.bend(150);
-		man.r_arm.bend(25);
-		man.r_elbow.bend(150);
-
-
-
 
 		// chess figures
-		const white = new THREE.Mesh(new THREE.BoxGeometry(4, 0, 4), new THREE.MeshBasicMaterial({
+		var white = new THREE.Mesh(new THREE.BoxGeometry(4, 0, 4), new THREE.MeshBasicMaterial({
 			color: '#ffd9b3'
 		}));
 		white.position.y = -4;
@@ -84,7 +61,7 @@
 		black.position.y = -4;
 		black.position.z = -10;
 		black.position.x = 4;
-		//scene.add(white, black);
+
 		// chess board
 		for (var i = 1; i <= 8; i++) {
 			for (var j = 1; j <= 8; j++) {
@@ -142,74 +119,71 @@
 			}
 		}
 
-		const boxWidth = 50;
-		const boxHeight = 1.5;
-		const boxDepth = 40;
-		const texture = loader.load(
+
+		var texture = loader.load(
 			'https://images.pexels.com/photos/129733/pexels-photo-129733.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
-		const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
-		const material = new THREE.MeshBasicMaterial({
+		var geometry = new THREE.BoxGeometry(50, 1.5, 40);
+		var material = new THREE.MeshBasicMaterial({
 			map: texture
 		});
-		const table = new THREE.Mesh(geometry, material);
+		var table = new THREE.Mesh(geometry, material);
 		table.position.y = -5;
 		table.castShadow = true;
 		table.receiveShadow = true;
 		scene.add(table);
 
-		var tableLeg = new THREE.Mesh(new THREE.BoxGeometry(1.5, 30, 1.5), material);
-		tableLeg.position.x = 10;
-		tableLeg.position.y = -20;
-		tableLeg.position.z = 10;
-		tableLeg.castShadow = true;
-		tableLeg.receiveShadow = true;
+		var tableLeg1 = new THREE.Mesh(new THREE.BoxGeometry(1.5, 30, 1.5), material);
+		tableLeg1.position.x = 10;
+		tableLeg1.position.y = -20;
+		tableLeg1.position.z = 10;
+		tableLeg1.castShadow = true;
+		tableLeg1.receiveShadow = true;
 
-		var tableLeg2 = tableLeg.clone();
+		var tableLeg2 = tableLeg1.clone();
 		tableLeg2.position.x = -10;
 
-		var tableLeg3 = tableLeg.clone();
+		var tableLeg3 = tableLeg1.clone();
 		tableLeg3.position.x = -10;
 		tableLeg3.position.z = -10;
 
 		var tableLeg4 = tableLeg3.clone();
 		tableLeg4.position.x = 10;
-		scene.add(tableLeg, tableLeg2, tableLeg3, tableLeg4);
+		scene.add(tableLeg1, tableLeg2, tableLeg3, tableLeg4);
 
-		const chessGeometry = new THREE.BoxGeometry(35, 0, 35);
-		const chessMaterial = new THREE.MeshBasicMaterial({
+		var chessGeometry = new THREE.BoxGeometry(35, 0, 35);
+		var chessMaterial = new THREE.MeshBasicMaterial({
 			map: loader.load(
 				'https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX20459486.jpg'
 			)
 		});
-		const chess = new THREE.Mesh(chessGeometry, chessMaterial);
+		var chess = new THREE.Mesh(chessGeometry, chessMaterial);
 		chess.position.y = -4.5;
-		//scene.add(chess);
 
-		var chair = new THREE.Mesh(new THREE.BoxGeometry(12, 1, 12), material);
-		chair.position.x = 30;
-		chair.position.y = -17;
-		chair.castShadow = true;
-		chair.receiveShadow = true;
-		scene.add(chair);
+		var chair1 = new THREE.Mesh(new THREE.BoxGeometry(12, 1, 12), material);
+		chair1.position.x = 30;
+		chair1.position.y = -17;
+		chair1.castShadow = true;
+		chair1.receiveShadow = true;
+		scene.add(chair1);
 
-		var chairLeg1 = new THREE.Mesh(new THREE.BoxGeometry(1.5, 15, 1.5), material);
-		chairLeg1.position.x = 33;
-		chairLeg1.position.y = -25;
-		chairLeg1.position.z = -2;
-		chairLeg1.castShadow = true;
-		chairLeg1.receiveShadow = true;
+		var chair1Leg1 = new THREE.Mesh(new THREE.BoxGeometry(1.5, 15, 1.5), material);
+		chair1Leg1.position.x = 33;
+		chair1Leg1.position.y = -25;
+		chair1Leg1.position.z = -2;
+		chair1Leg1.castShadow = true;
+		chair1Leg1.receiveShadow = true;
 
-		var chairLeg2 = chairLeg1.clone();
-		chairLeg2.position.z = 2;
+		var chair1Leg2 = chair1Leg1.clone();
+		chair1Leg2.position.z = 2;
 
-		var chairLeg3 = chairLeg1.clone();
-		chairLeg3.position.x = 27.5;
-		chairLeg3.position.z = 2;
+		var chair1Leg3 = chair1Leg1.clone();
+		chair1Leg3.position.x = 27.5;
+		chair1Leg3.position.z = 2;
 
-		var chairLeg4 = chairLeg3.clone();
-		chairLeg4.position.z = -2;
+		var chair1Leg4 = chair1Leg3.clone();
+		chair1Leg4.position.z = -2;
 
-		scene.add(chairLeg1, chairLeg2, chairLeg3, chairLeg4);
+		scene.add(chair1Leg1, chair1Leg2, chair1Leg3, chair1Leg4);
 
 		var chair2 = new THREE.Mesh(new THREE.BoxGeometry(12, 1, 12), material);
 		chair2.position.x = -30;
@@ -236,24 +210,45 @@
 		chair2Leg4.position.z = -2;
 
 		scene.add(chair2Leg1, chair2Leg2, chair2Leg3, chair2Leg4);
-		// анимация на човечетата, поза в момент t
-		function animate(t) {
-			woman.head.tilt(10 * cos(2 * t));
-			woman.r_knee.bend(45 - 10 * cos(-2 * t));
-			woman.r_leg.tilt(10 * cos(2 * t));
-			woman.r_ankle.bend(-10 * cos(-2 * t));
-			woman.r_arm.tilt(10 * cos(t));
-			woman.r_leg.straddle(15);
-			woman.l_leg.straddle(-35);
 
+		function moveWoman1(t) {
+			woman1.head.tilt(10 * cos(2 * t));
+			woman1.r_knee.bend(45 - 10 * cos(-2 * t));
+			woman1.r_leg.tilt(10 * cos(2 * t));
+			woman1.r_ankle.bend(-10 * cos(-2 * t));
+			woman1.r_arm.tilt(10 * cos(t));
+			woman1.r_leg.straddle(15);
+			woman1.l_leg.straddle(-35);
+			woman1.l_leg.bend(90);
+			woman1.r_leg.bend(90);
+			woman1.l_knee.bend(90);
+			woman1.r_knee.bend(90);
+			woman1.l_arm.bend(25);
+			woman1.l_elbow.bend(150);
+			woman1.r_arm.bend(25);
+			woman1.r_elbow.bend(150);
+			woman1.turn(-180);
+		}
+
+		function moveMan(t) {
+			man.l_leg.bend(90);
+			man.r_leg.bend(90);
+			man.l_knee.bend(90);
+			man.r_knee.bend(90);
+			man.l_arm.bend(25);
+			man.l_elbow.bend(150);
+			man.r_arm.bend(25);
+			man.r_elbow.bend(150);
 			man.head.nod(10 * cos(2 * t));
 			man.r_leg.raise(95 + 2 * cos(5 * t));
 			man.r_ankle.bend(-20 + 3 * cos(-5 * t))
 			man.r_elbow.bend(150);
 			man.r_arm.straddle(-9 * cos(t));
 			man.l_arm.straddle(-9 * cos(t));
+		}
 
-
+		function moveWoman2(t) {
+			woman2.turn(180);
 			woman2.r_leg.bend(2 * cos(t));
 			woman2.r_elbow.bend(50);
 			woman2.r_arm.bend(25);
@@ -266,6 +261,14 @@
 			woman2.l_fingers.bend(65 + sin(3 * t));
 			woman2.r_fingers.bend(35 + -3 * sin(-0.5 * t));
 			woman2.head.nod(5 * cos(2 * t));
+		}
+
+		// анимация на човечетата, поза в момент t
+		function animate(t) {
+
+			moveWoman1(t);
+			moveMan(t);
+			moveWoman2(t);
 
 			scene.rotation.y = t / 1000;
 		}
